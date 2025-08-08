@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HBaker's - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: #000;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-section img {
+      height: 60px;
+      margin-right: 15px;
+    }
+
+    .logo-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .logo-text p {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.2rem;
+      color: #ccc;
+      margin: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.1rem; /* <-- Increase this value as needed */
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #e63946;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 15px;
+      margin-left: 30px;
+    }
+
+    .contact-buttons a {
+      background-color: #e63946;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .contact-buttons a:hover {
+      background-color: #ff4d5a;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 90vh;
+      overflow: hidden;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(60%);
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 20px 40px;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-text h2 {
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+      margin: 0;
+    }
+
+    .hero-text a button {
+      background-color: #e63946;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .hero-text a button:hover {
+      background-color: #ff4d5a;
+    }
+
+    .hero-text p {
+      font-family: 'Great Vibes', cursive;
+      font-style: italic;
+      font-size: 1.8rem;
+      margin-bottom: 0;
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      max-width: 90%;
+    }
+
+    .testimonials {
+      background-color: #111;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .testimonials h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #fff;
+    }
+
+    .testimonial-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .testimonial {
+      background-color: #1c1c1c;
+      padding: 20px;
+      max-width: 300px;
+      border-radius: 10px;
+      color: #eee;
+      font-style: italic;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    }
+
+    .testimonial h4 {
+      margin-top: 15px;
+      font-style: normal;
+      font-weight: normal;
+      color: #e63946;
+    }
+
+    .green-button {
+      background-color: #25D366 !important; /* WhatsApp green */
+      color: white !important;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1.1rem; /* <-- Increase this value as needed */
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .green-button:hover {
+      background-color: #1ebe5d !important;
+    } 
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .nav-links a {
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+
+  .contact-buttons {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .contact-buttons a {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+
+  .hero-text h2 {
+    font-size: 2rem;
+    padding: 0 10px;
+  }
+
+  .hero-text p {
+    font-size: 1.2rem;
+    padding: 10px;
+  }
+
+  .hero-text a button {
+    font-size: 1rem;
+    padding: 10px 25px;
+  }
+
+  .testimonial-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .testimonial {
+    width: 90%;
+  }
+
+  .logo-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .logo-section img {
+    height: 50px;
+  }
+
+  .logo-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .logo-text p {
+    font-size: 1rem;
+  }
+}
+
+    
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo-section">
+      <img src="image/Logo.png" alt="HBaker's Logo">
+      <div class="logo-text">
+        <h1>HBaker's</h1>
+        <p>Your Daily Treat</p>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <div class="contact-buttons">
+        <a href="tel:+97142733762" class="green-button"><i class="fas fa-phone-alt"></i> Call Us</a>
+        <a href="https://wa.me/971585733762?text=Hi%20HBaker's,%20I'd%20like%20to%20place%20an%20order." class="green-button" target="_blank">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  
+  <section class="hero">
+    <img src="image/Home.png" alt="Home Picture">
+    <div class="hero-text">
+      <h2>Fresh Flavors, Every Time You Dine</h2>
+
+      <!-- Button BEFORE tagline -->
+      <a href="menu.html">
+        <button>Make an Order</button>
+      </a>
+
+      <!-- Tagline placed clearly at bottom -->
+      <p>
+        <em>Come with your Favorite People and Taste the Happiness in Every Bite</em>
+      </p>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial-container">
+      <div class="testimonial">
+        <p>"The best place to grab a quick bite. Love the chicken tikka wrap!"</p>
+        <h4>- Ayesha R.</h4>
+      </div>
+      <div class="testimonial">
+        <p>"Affordable prices, delicious food, and friendly staff. Highly recommended!"</p>
+        <h4>- Mohamed K.</h4>
+      </div>
+      <div class="testimonial">
+        <p>"Always fresh and flavorful. My go-to cafeteria in Deira!"</p>
+        <h4>- Lina S.</h4>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

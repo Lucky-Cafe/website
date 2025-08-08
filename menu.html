@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HBaker's Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />  
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: relative;
+    }
+    header.navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    .logo-section {
+      display: flex;
+      align-items: center;
+    }
+    .logo-section img {
+      height: 60px;
+      margin-right: 15px;
+    }
+    .logo-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin: 0;
+    }
+    .logo-text p {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.2rem;
+      color: #ccc;
+      margin: 0;
+    }
+    .nav-links a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.2rem; /* <-- Increase this value as needed */
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: #e63946;
+    }
+    .banner {
+      background: url('image/Banner5.png') no-repeat center center;
+      background-size: cover;
+      padding: 120px 20px;
+    }
+    .section-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 30px;
+      padding: 40px 20px;
+      /* background: #1c1c1c; */
+      background-color: rgba(0, 0, 0, 0.6); /* Optional: slight dark tint */
+      backdrop-filter: blur(4px);          /* Optional: make text stand out */
+      border-radius: 8px;
+      margin-bottom: 30px;
+      justify-items: center;
+      align-items: center;
+    }
+    .section-item {
+      text-align: center;
+      cursor: pointer;
+    }
+    .section-item img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+    .section-item img:hover {
+      transform: scale(1.05);
+    }
+    .section-item button {
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: 2px solid #fff;
+      background-color: transparent;
+      color: #fff;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .section-item button:hover {
+      background-color: #e63946;
+      border-color: #e63946;
+      color: #fff;
+    }
+    .sub-buttons {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px auto;
+      max-width: 1000px;
+      /* background: #222; */
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      border-radius: 12px;
+      padding: 30px;
+    }
+    .sub-buttons.active {
+      display: flex;
+    }
+    .sub-button-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+      background: #333;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    .sub-button-wrapper img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 12px;
+    }
+    .sub-button-wrapper button {
+    width: 140px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: #e74c3c; /* Vibrant red */
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+    .sub-button-wrapper button:hover {
+      filter: brightness(1.1);
+    }
+    .item-list {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      /* background: url('image/menu/blueberry.png') no-repeat center center; */
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      background-size: cover; 
+      margin: 20px auto;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .item-list.active {
+      display: flex;
+    }
+    .item-list h3 {
+      font-size: 24px;
+      color: #ff4c5b;
+      margin-bottom: 20px;
+    }
+    .item-list ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      max-width: 600px;
+      font-size: 18px;
+      width: 100%;
+    }
+    
+    .item-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 10px;
+    background: #2b2b2b;
+    border-radius: 6px;
+    border-left: 4px solid #e63946;
+    gap: 20px;
+    }
+
+    .item-list li span:first-child {
+    flex: 1; /* Takes remaining space */
+    min-width: 150px;
+    max-width: 250px;
+    font-weight: 500;
+    }
+
+
+    .item-list .price {
+    font-weight: bold;
+    color: #ffc107; 
+    }
+    body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('image/menu/coffeeBG.png') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 1;
+    z-index: -1;
+    }
+
+    .add-to-cart-btn {
+      background-color: #ffc107;
+      color: #000;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      border: 2px solid #fdd835;
+      border-radius: 20px;
+      padding: 3px 10px;
+      background: #fff;
+      color: #000;
+    }
+    .quantity-controls button {
+      background: none;
+      border: none;
+      font-size: 18px;
+      margin: 0 5px;
+      cursor: pointer;
+      color: #000;
+    }
+    .quantity-controls .qty {
+      min-width: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+    #cart-box {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #fff;
+      color: #000;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00000080;
+      z-index: 999;
+      width: 280px;
+      font-size: 14px;
+    }
+    #cart-items {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    #cart-items div {
+      margin-bottom: 5px;
+    }
+    #send-whatsapp {
+      width: 100%;
+      background: #25d366;
+      border: none;
+      padding: 10px;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+  .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background-color: #000;
+  color: #fff;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.nav-links a:hover {
+  color: #ffc107;
+}
+
+.contact-buttons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.contact-buttons a {
+  background-color: #e63946;
+  padding: 8px 15px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.contact-buttons a:hover {
+  background-color: #ff4d5a;
+}
+ 
+.cart-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.cart-icon img {
+  width: 32px;
+  height: 32px;
+}
+
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #ffc107;
+  color: #000;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+.green-button {
+  background-color: #25D366; /* WhatsApp Green */
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 5px;
+  margin-left: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.green-button:hover {
+  background-color: #1ebe5d;
+}    
+  </style>
+</head>
+<body>
+  
+  <header class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color: rgba(0, 0, 0, 0.9);">
+  <!-- Left: Logo -->
+  <div class="logo-section" style="display: flex; align-items: center;">
+    <img src="image/Logo.png" alt="HBaker's Logo" style="height: 60px; margin-right: 15px;" />
+    <div class="logo-text">
+      <h1 style="margin: 0; color: white;">HBaker's</h1>
+      <p style="margin: 0; font-style: italic; color: white;">Your Daily Treat</p>
+    </div>
+  </div>
+   <!-- <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <div class="contact-buttons">
+        <a href="tel:+97142733762"><i class="fas fa-phone-alt"></i> Call Us</a>
+        <a href="https://wa.me/971585733762?text=Hi%20HBaker's,%20I'd%20like%20to%20place%20an%20order." target="_blank">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </nav> -->
+
+<nav class="nav-links">
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+
+  <!-- Green button-style links -->
+  <a href="tel:+97142733762" class="green-button">
+    <i class="fas fa-phone-alt"></i> Call
+  </a>
+  <a href="https://wa.me/971585733762?text=Hi%20HBaker's,%20I'd%20like%20to%20place%20an%20order." 
+     target="_blank" class="green-button">
+    <i class="fab fa-whatsapp"></i> WhatsApp
+  </a>
+</nav>
+
+  <!-- Right: Cart Icon -->
+  <div class="cart-icon" onclick="toggleCartModal()" style="position: relative; margin-left: 30px; cursor: pointer;">
+    <img src="image/menu/Cart2.png" alt="Cart" style="width: 40px; height: 40px;" />
+    <span id="cart-count" style="position: absolute; top: -8px; right: -10px; background-color: #ffc107; color: black; border-radius: 50%; padding: 2px 6px; font-size: 14px; font-weight: bold;">0</span>
+  </div>
+</header>
+
+  
+  <section class="banner"></section>
+
+  <div class="section-nav">
+    <div class="section-item" onclick="showSection('special')">
+      <img src="image/menu/HB_Specials_Logo.png" alt="HB Specials" />
+      <button>HB Specials</button>
+    </div>
+    <div class="section-item" onclick="showSection('hot')">
+      <img src="image/menu/HotCorner.png" alt="Hot Corner" />
+      <button>Hot Corner</button>
+    </div>
+    <div class="section-item" onclick="showSection('sandwiches')">
+      <img src="image/menu/Sandwiches.png" alt="Sandwiches" />
+      <button>Sandwiches</button>
+    </div>
+    <div class="section-item" onclick="showSection('meals')">
+      <img src="image/menu/meals.png" alt="Meals & Mains" />
+      <button>Meals & Mains</button>
+    </div>
+    <div class="section-item" onclick="showSection('drinks')">
+      <img src="image/menu/drinks.png" alt="Icy Cool Drinks" />
+      <button>Icy Cool Drinks</button>
+    </div>
+    <div class="section-item" onclick="showSection('fizzy')">
+      <img src="image/menu/fizzy.png" alt="Fizzy Refreshments" />
+      <button>Fizzy Refreshments</button>
+    </div>
+  </div>
+
+      <!-- HB Specials Items Section -->
+
+<div id="special-buttons" class="sub-buttons active">
+    <div class="sub-button-wrapper">
+      <img src="image/menu/pazhampori-beef.png" alt="Pazhampori Beef" />
+      <h3>Pazhampori Beef</h3>
+      <p>AED 8</p>
+      <button onclick="addToCart('Pazhampori Beef', 8)">Add to Cart</button>
+    </div>
+  
+    <div class="sub-button-wrapper">
+      <img src="image/menu/mixburger.png" alt="Mix Burger Meal" />
+      <h3>Mix Burger Meal</h3>
+      <p>AED 15</p>
+      <button onclick="addToCart('Mix Burger Meal', 15)">Add to Cart</button>
+    </div>
+  
+    <div class="sub-button-wrapper">
+      <img src="image/menu/masalachai.png" alt="Special Masala Chai">
+      <h3>Special Masala Chai</h3>
+      <p> AED 2.5</p>
+      <button onclick="addToCart('Special Masala Chai', 2.5)">Add to Cart</button>   
+    </div>
+  </div>
+
+  
+  <div id="hot-buttons" class="sub-buttons active">
+    <div class="sub-button-wrapper">
+      <img src="image/menu/Tea.jpg" alt="Tea" />
+      <button onclick="showItems('tea')">Tea</button>
+    </div>
+    <div class="sub-button-wrapper">
+      <img src="image/menu/coffee.png" alt="Coffee" />
+      <button onclick="showItems('coffee')">Coffee</button>
+    </div>
+    <div class="sub-button-wrapper">
+      <img src="image/menu/keralasnacks.png" alt="Snacks" />
+      <button onclick="showItems('snacks')">Snacks</button>
+    </div>
+  </div>
+
+  <div id="tea" class="item-list">
+    <h3>Tea</h3>
+    <ul>
+      <li><span>Sada Tea</span><span class="price">1 AED</span></li>
+      <li><span>Karak Tea</span><span class="price">1 AED</span></li>
+      <li><span>Fresh Milk (Regular)</span><span class="price">2 AED</span></li>
+      <li><span>Fresh Milk (Large)</span><span class="price">4 AED</span></li>
+      <li><span>Black Tea (Regular)</span><span class="price">1 AED</span></li>
+      <li><span>Black Tea (Large)</span><span class="price">1.5 AED</span></li>
+      <li><span>Green Tea </span><span class="price">1 AED</span></li>
+      <li><span>Mint Green Tea </span><span class="price">1.5 AED</span></li>
+      <li><span>Lemon Tea</span><span class="price">1.5 AED</span></li>
+      <li><span>Masala Tea</span><span class="price">2 AED</span></li>
+      <li><span>Ginger Tea</span><span class="price">1.5 AED</span></li>
+    </ul>
+  </div>
+
+  <div id="coffee" class="item-list">
+    <h3>Coffee</h3>
+    <ul>
+      <li><span>Black Coffee (Regular)</span><span class="price">2 AED</span></li>
+      <li><span>Black Coffee (Large)</span><span class="price">4 AED</span></li>
+      <li><span>Black Coffee Lemon</span><span class="price">2.5 AED</span></li>
+      <li><span>Milk Coffee (Regular)</span><span class="price">3 AED</span></li>
+      <li><span>Milk Coffee (Large)</span><span class="price">6 AED</span></li>
+      <li><span>Cold Coffee</span><span class="price">5 AED</span></li>
+      <li><span>Chukku Kaappi (Regular)</span><span class="price">2 AED</span></li>
+      <li><span>Chukku Kaappi (Large)</span><span class="price">4 AED</span></li>
+      <li><span>Nescafe Instant Coffee</span><span class="price">4 AED</span></li>
+    </ul>
+  </div>
+
+  <div id="snacks" class="item-list">
+    <h3>Snacks</h3>
+    <ul>
+      <li><span>Samosa (Veg)</span><span class="price">1 AED</span></li>
+      <li><span>Samosa (Chicken)</span><span class="price">2 AED</span></li>
+      <li><span>Spring Roll</span><span class="price">2 AED</span></li>
+      <li><span>Chicken Roll</span><span class="price">2 AED</span></li>
+      <li><span>Cutlet</span><span class="price">2 AED</span></li>
+      <li><span>Pazham Pori</span><span class="price">1.5 AED</span></li>
+      <li><span>Ney Pathiri</span><span class="price">1 AED</span></li>
+      <li><span>Pakkoda</span><span class="price">2 AED</span></li>
+      <li><span>Poo Cake</span><span class="price">2 AED</span></li>
+      <li><span>Madakku</span><span class="price">2 AED</span></li>
+      <li><span>Mutta Bajji</span><span class="price">1 AED</span></li>
+      <li><span>Mulaku Bajji</span><span class="price">1 AED</span></li>
+      <li><span>Potato Bajji (2pcs)</span><span class="price">1 AED</span></li>
+    </ul>
+  </div>
+
+<div id="sandwiches-buttons" class="sub-buttons">
+  <div class="sub-button-wrapper">
+    <img src="image/menu/sandwich.png" alt="Sandwiches" />
+    <button onclick="showItems('sandwiches-list')">Sandwiches</button>
+  </div>
+  <div class="sub-button-wrapper">
+    <img src="image/menu/burger.png" alt="Burgers" />
+    <button onclick="showItems('burgers-list')">Burgers</button>
+  </div>
+</div>
+
+<div id="sandwiches-list" class="item-list">
+  <h3>Sandwiches</h3>
+  <ul>
+    <li><span>Porotta - Egg</span><span class="price">3 AED</span></li>
+    <li><span>Porotta - Chicken</span><span class="price">5 AED</span></li>
+    <li><span>Porotta - Beef</span><span class="price">5 AED</span></li>
+    <li><span>Porotta - Nuggets</span><span class="price">8 AED</span></li>
+    <li><span>Porotta - Chicken Popcorn</span><span class="price">8 AED</span></li>
+    <li><span>Porotta - Sausage</span><span class="price">8 AED</span></li>
+    <li><span>Bread Sandwich - Egg</span><span class="price">3 AED</span></li>
+    <li><span>Bread Sandwich - Chicken</span><span class="price">5 AED</span></li>
+    <li><span>Bread Sandwich - Beef</span><span class="price">5 AED</span></li>
+    <li><span>Bread Sandwich - Popcorn</span><span class="price">8 AED</span></li>
+    <li><span>Bread Sandwich - Sausage</span><span class="price">7 AED</span></li>
+    <li><span>Club Sandwich</span><span class="price">13 AED</span></li>
+  </ul>
+</div>
+
+<div id="burgers-list" class="item-list">
+  <h3>Burgers</h3>
+  <ul>
+    <li><span>Chicken Burger - Normal</span><span class="price">7 AED</span></li>
+    <li><span>Chicken Burger - Double</span><span class="price">12 AED</span></li>
+    <li><span>Fillet Burger - Chicken</span><span class="price">10 AED</span></li>
+    <li><span>Chicken Popcorn Burger</span><span class="price">12 AED</span></li>
+    <li><span>Nuggets Burger</span><span class="price">11 AED</span></li>
+    <li><span>Beef Burger - Normal</span><span class="price">8 AED</span></li>
+    <li><span>Beef Burger - Double</span><span class="price">13 AED</span></li>
+    <li><span>Tikka Burger</span><span class="price">12 AED</span></li>
+    <li><span>Fish Fillet Burger</span><span class="price">11 AED</span></li>
+    <li><span>H.Baker Special Mixed Burger</span><span class="price">15 AED</span></li>
+  </ul>
+</div>
+
+  
+<div id="meals-buttons" class="sub-buttons">
+  <div class="sub-button-wrapper">
+    <img src="image/menu/breakfast.png" alt="Breakfast" />
+    <button onclick="showItems('breakfast-list')">Breakfast</button>
+  </div>
+  <div class="sub-button-wrapper">
+    <img src="image/menu/breads.png" alt="Breads" />
+    <button onclick="showItems('breads-list')">Breads</button>
+  </div>
+  <div class="sub-button-wrapper">
+    <img src="image/menu/curry.png" alt="Curry" />
+    <button onclick="showItems('curry-list')">Curry</button>
+  </div>
+</div>
+
+<div id="breakfast-list" class="item-list">
+  <h3>Breakfast</h3>
+  <ul>
+    <li><span>Dosa Set</span><span class="price">4 AED</span></li>
+    <li><span>Ghee Roast</span><span class="price">4 AED</span></li>
+    <li><span>Masala Dosa</span><span class="price">5 AED</span></li>
+    <li><span>Puttu Set</span><span class="price">3 AED</span></li>
+    <li><span>Idiyappam Set</span><span class="price">3 AED</span></li>
+    <li><span>Appam Set</span><span class="price">3 AED</span></li>
+    <li><span>Uthappam</span><span class="price">5 AED</span></li>
+    <li><span>Porotta Set</span><span class="price">4 AED</span></li>
+    <li><span>Poori Baaji</span><span class="price">5 AED</span></li>
+  </ul>
+</div>
+
+<div id="breads-list" class="item-list">
+  <h3>Breads</h3>
+  <ul>
+    <li><span>Porotta</span><span class="price">1 AED</span></li>
+    <li><span>Appam</span><span class="price">1 AED</span></li>
+    <li><span>Chappathi</span><span class="price">1 AED</span></li>
+    <li><span>Nice Pathiri</span><span class="price">1 AED</span></li>
+    <li><span>Kothu Porotta</span><span class="price">8 AED</span></li>
+  </ul>
+</div>
+
+<div id="curry-list" class="item-list">
+  <h3>Curry</h3>
+  <ul>
+    <li><span>Egg Curry</span><span class="price">3 AED</span></li>
+    <li><span>Egg Roast</span><span class="price">5 AED</span></li>
+    <li><span>Kadala Curry</span><span class="price">3 AED</span></li>
+    <li><span>Veg Kuruma</span><span class="price">3 AED</span></li>
+    <li><span>Baaji</span><span class="price">3 AED</span></li>
+    <li><span>Green Peas Masala</span><span class="price">4 AED</span></li>
+    <li><span>Egg & Peas Fry</span><span class="price">6 AED</span></li>
+    <li><span>Beef Curry</span><span class="price">7 AED</span></li>
+    <li><span>Beef Fry</span><span class="price">8 AED</span></li>
+    <li><span>Beef Roast</span><span class="price">7 AED</span></li>
+    <li><span>Beef Masala (SPL)</span><span class="price">10 AED</span></li>
+    <li><span>Beef Dry Fry</span><span class="price">10 AED</span></li>
+    <li><span>Chicken Chaps</span><span class="price">6 AED</span></li>
+    <li><span>Chicken Roast</span><span class="price">7 AED</span></li>
+    <li><span>Chicken Fry</span><span class="price">7 AED</span></li>
+    <li><span>Chicken Masala (SPL)</span><span class="price">10 AED</span></li>
+    <li><span>Chicken Chukka</span><span class="price">8 AED</span></li>
+    <li><span>Chilli Chicken</span><span class="price">10 AED</span></li>
+    <li><span>Chilli Beef</span><span class="price">10 AED</span></li>
+    <li><span>Chilli Gobi</span><span class="price">7 AED</span></li>
+  </ul>
+</div>
+
+<div id="drinks-buttons" class="sub-buttons">
+  <div class="sub-button-wrapper">
+    <img src="image/menu/juice.png" alt="Juice" />
+    <button onclick="showItems('juice-list')">Juice</button>
+  </div>
+  <div class="sub-button-wrapper">
+    <img src="image/menu/shakes.png" alt="Shake" />
+    <button onclick="showItems('shake-list')">Shake</button>
+  </div>
+  <div class="sub-button-wrapper">
+    <img src="image/menu/fruitsalad.png" alt="Fruit Salad" />
+    <button onclick="showItems('fruit-salad-list')">Fruit Salad</button>
+  </div>
+  <div class="sub-button-wrapper">
+    <img src="image/menu/faluda.png" alt="Faluda" />
+    <button onclick="showItems('faluda-list')">Faluda</button>
+  </div>
+</div>
+
+<div id="juice-list" class="item-list">
+  <h3>Juices</h3>
+  <ul>
+    <li><span>Avocado (R)</span><span class="price">5 AED</span></li>
+    <li><span>Avocado (M)</span><span class="price">8 AED</span></li>
+    <li><span>Avocado (L)</span><span class="price">10 AED</span></li>
+    <li><span>Watermelon (R)</span><span class="price">3 AED</span></li>
+    <li><span>Watermelon (M)</span><span class="price">6 AED</span></li>
+    <li><span>Watermelon (L)</span><span class="price">8 AED</span></li>
+    <li><span>Banana (R)</span><span class="price">3 AED</span></li>
+    <li><span>Banana (M)</span><span class="price">6 AED</span></li>
+    <li><span>Banana (L)</span><span class="price">8 AED</span></li>
+    <li><span>Kiwi (R)</span><span class="price">5 AED</span></li>
+    <li><span>Kiwi (M)</span><span class="price">8 AED</span></li>
+    <li><span>Kiwi (L)</span><span class="price">10 AED</span></li>
+    <li><span>Pineapple (R)</span><span class="price">5 AED</span></li>
+    <li><span>Pineapple (M)</span><span class="price">8 AED</span></li>
+    <li><span>Pineapple (L)</span><span class="price">10 AED</span></li>
+    <li><span>Orange (R)</span><span class="price">5 AED</span></li>
+    <li><span>Orange (M)</span><span class="price">8 AED</span></li>
+    <li><span>Orange (L)</span><span class="price">10 AED</span></li>
+    <li><span>Grape (R)</span><span class="price">5 AED</span></li>
+    <li><span>Grape (M)</span><span class="price">8 AED</span></li>
+    <li><span>Grape (L)</span><span class="price">10 AED</span></li>
+    <li><span>Strawberry (R)</span><span class="price">5 AED</span></li>
+    <li><span>Strawberry (M)</span><span class="price">8 AED</span></li>
+    <li><span>Strawberry (L)</span><span class="price">10 AED</span></li>
+    <li><span>Chickoo (R)</span><span class="price">5 AED</span></li>
+    <li><span>Chickoo (M)</span><span class="price">8 AED</span></li>
+    <li><span>Chickoo (L)</span><span class="price">10 AED</span></li>
+    <li><span>Mango (R)</span><span class="price">5 AED</span></li>
+    <li><span>Mango (M)</span><span class="price">8 AED</span></li>
+    <li><span>Mango (L)</span><span class="price">10 AED</span></li>
+    <li><span>Apple (R)</span><span class="price">5 AED</span></li>
+     <li><span>Apple (M)</span><span class="price">8 AED</span></li>
+     <li><span>Apple (L)</span><span class="price">10 AED</span></li>
+    <li><span>Pomegranate (R)</span><span class="price">5 AED</span></li>
+    <li><span>Pomegranate (M)</span><span class="price">8 AED</span></li>
+    <li><span>Pomegranate (L)</span><span class="price">10 AED</span></li>
+    <li><span>Shamam (R)</span><span class="price">5 AED</span></li>
+    <li><span>Shamam (M)</span><span class="price">8 AED</span></li>
+    <li><span>Shamam (L)</span><span class="price">10 AED</span></li>
+  </ul>
+</div>
+
+<div id="shake-list" class="item-list">
+  <h3>Shakes</h3>
+  <ul>
+    <li><span>Milk Shake (R)</span><span class="price">6 AED</span></li>
+    <li><span>Milk Shake (M)</span><span class="price">8 AED</span></li>
+    <li><span>Milk Shake (L)</span><span class="price">12 AED</span></li>
+    <li><span>Mango Shake (R)</span><span class="price">6 AED</span></li>
+    <li><span>Mango Shake (M)</span><span class="price">8 AED</span></li>
+    <li><span>Mango Shake (L)</span><span class="price">12 AED</span></li>
+    <li><span>Strawberry Shake (R)</span><span class="price">6 AED</span></li>
+    <li><span>Strawberry Shake (M)</span><span class="price">8 AED</span></li>
+    <li><span>Strawberry Shake (L)</span><span class="price">12 AED</span></li>
+    <li><span>Chicku Shake (R)</span><span class="price">6 AED</span></li>
+    <li><span>Chicku Shake (M)</span><span class="price">8 AED</span></li>
+    <li><span>Chicku Shake (L)</span><span class="price">12 AED</span></li>
+    <li><span>Papaya Shake (R)</span><span class="price">6 AED</span></li>
+    <li><span>Papaya Shake (M)</span><span class="price">8 AED</span></li>
+    <li><span>Papaya Shake (R)</span><span class="price">12 AED</span></li>
+    <li><span>Tender Coconut Shake (R)</span><span class="price">6 AED</span></li>
+    <li><span>Tender Coconut Shake (M)</span><span class="price">8 AED</span></li>
+    <li><span>Tender Coconut Shake (L)</span><span class="price">12 AED</span></li>
+    <li><span>H.Baker Special Shake(R)</span><span class="price">10 AED</span></li>
+    <li><span>H.Baker Special Shake (M)</span><span class="price">12 AED</span></li>
+    <li><span>H.Baker Special Shake (L)</span><span class="price">14 AED</span></li>
+  </ul>
+</div>
+
+<div id="fruit-salad-list" class="item-list">
+  <h3>Fruit Salad</h3>
+  <ul>
+    <li><span>Fruit Salad - Normal (R)</span><span class="price">8 AED</span></li>
+    <li><span>Fruit Salad - Normal(M)</span><span class="price">10 AED</span></li>
+    <li><span>Fruit Salad - Normal (L)</span><span class="price">12 AED</span></li>
+    <li><span>Fruit Salad with Ice Cream (R)</span><span class="price">11 AED</span></li>
+    <li><span>Fruit Salad with Ice Cream (M)</span><span class="price">13 AED</span></li>
+    <li><span>Fruit Salad with Ice Cream (L)</span><span class="price">15 AED</span></li>
+    <li><span>Fruit Salad with Mixed Ice Cream (R)</span><span class="price">12 AED</span></li>
+    <li><span>Fruit Salad with Mixed Ice Cream (M)</span><span class="price">14 AED</span></li>
+    <li><span>Fruit Salad with Mixed Ice Cream (L)</span><span class="price">16 AED</span></li>
+  </ul>
+</div>
+
+<div id="faluda-list" class="item-list">
+  <h3>Faluda</h3>
+  <ul>
+    <li><span>Vanilla Faluda (R)</span><span class="price">6 AED</span></li>
+    <li><span>Vanilla Faluda (M)</span><span class="price">8 AED</span></li>
+    <li><span>Vanilla Faluda (L)</span><span class="price">10 AED</span></li>
+    <li><span>Strawberry Faluda (R)</span><span class="price">8 AED</span></li>
+    <li><span>Strawberry Faluda (M)</span><span class="price">11 AED</span></li>
+    <li><span>Strawberry Faluda (L)</span><span class="price">14 AED</span></li>
+    <li><span>Pista Faluda (R)</span><span class="price">8 AED</span></li>
+    <li><span>Pista Faluda (M)</span><span class="price">11 AED</span></li>
+    <li><span>Pista Faluda (L)</span><span class="price">14 AED</span></li>
+    <li><span>Butterscotch Faluda (R)</span><span class="price">8 AED</span></li>
+    <li><span>Butterscotch Faluda (M)</span><span class="price">11 AED</span></li>
+    <li><span>Butterscotch Faluda (L)</span><span class="price">14 AED</span></li>
+    <li><span>Mango Faluda (R)</span><span class="price">8 AED</span></li>
+    <li><span>Mango Faluda (M)</span><span class="price">11 AED</span></li>
+    <li><span>Mango Faluda (L)</span><span class="price">14 AED</span></li>
+    <li><span>Chocolate Faluda (R)</span><span class="price">8 AED</span></li>
+    <li><span>Chocolate Faluda (M)</span><span class="price">11 AED</span></li>
+    <li><span>Chocolate Faluda (L)</span><span class="price">14 AED</span></li>
+    <li><span>Tender Coconut Faluda (R)</span><span class="price">8 AED</span></li>
+    <li><span>Tender Coconut Faluda (M)</span><span class="price">11 AED</span></li>
+    <li><span>Tender Coconut Faluda (L)</span><span class="price">14 AED</span></li>
+    <li><span>Chatti Faluda (R)</span><span class="price">8 AED</span></li>
+    <li><span>Chatti Faluda (M)</span><span class="price">11 AED</span></li>
+    <li><span>Chatti Faluda (L)</span><span class="price">14 AED</span></li>
+  </ul>
+</div>
+
+<div id="fizzy-buttons" class="sub-buttons">
+  <div class="sub-button-wrapper">
+    <img src="image/menu/mojitos.png" alt="Mojitos" />
+    <button onclick="showItems('mojitos-list')">Mojitos</button>
+  </div>
+  <div class="sub-button-wrapper">
+    <img src="image/menu/lessi.png" alt="Lassi" />
+    <button onclick="showItems('lassi-list')">Lassi</button>
+  </div>
+  <div class="sub-button-wrapper">
+    <img src="image/menu/limespecials.png" alt="Lime Specials" />
+    <button onclick="showItems('lime-list')">Lime Specials</button>
+  </div>
+</div>
+
+<div id="mojitos-list" class="item-list">
+  <h3>Mojitos</h3>
+  <ul>
+    <li><span>Blueberry (R)</span><span class="price">6 AED</span></li>
+    <li><span>Blueberry (L)</span><span class="price">9 AED</span></li>
+    <li><span>Blackberry (R)</span><span class="price">6 AED</span></li>
+    <li><span>Blackberry (L)</span><span class="price">9 AED</span></li>
+    <li><span>Green Apple (R)</span><span class="price">6 AED</span></li>
+    <li><span>Green Apple (L)</span><span class="price">9 AED</span></li>
+    <li><span>Strawberry (R)</span><span class="price">6 AED</span></li>
+    <li><span>Strawberry (L)</span><span class="price">9 AED</span></li>
+    <li><span>Watermelon (R)</span><span class="price">6 AED</span></li>
+    <li><span>Watermelon (L)</span><span class="price">9 AED</span></li>
+    <li><span>Passionfruit (R)</span><span class="price">6 AED</span></li>
+    <li><span>Passionfruit (L)</span><span class="price">9 AED</span></li>
+    <li><span>Redbull Mojito (R)</span><span class="price">10 AED</span></li>
+    <li><span>Redbull Mojito (L)</span><span class="price">16 AED</span></li>
+  </ul>
+</div>
+
+<div id="lassi-list" class="item-list">
+  <h3>Lassi</h3>
+  <ul>
+    <li><span>Sweet Lassi</span><span class="price">5 AED</span></li>
+    <li><span>Orange Lassi</span><span class="price">6 AED</span></li>
+    <li><span>Mango Lassi (R)</span><span class="price">6 AED</span></li>
+    <li><span>Mango Lassi (L)</span><span class="price">9 AED</span></li>
+    <li><span>Badam Lassi (R)</span><span class="price">6 AED</span></li>
+    <li><span>Badam Lassi (L)</span><span class="price">9 AED</span></li>
+    <li><span>Pista (R)</span><span class="price">6 AED</span></li>
+    <li><span>Pista (L)</span><span class="price">9 AED</span></li>
+    <li><span>Dry Fruit (R)</span><span class="price">6 AED</span></li>
+    <li><span>Dry Fruit (L)</span><span class="price">9 AED</span></li>
+    <li><span>Vanilla (R)</span><span class="price">6 AED</span></li>
+    <li><span>Vanilla (L)</span><span class="price">9 AED</span></li>
+    <li><span>Butterscotch (R)</span><span class="price">6 AED</span></li>
+    <li><span>Butterscotch (L)</span><span class="price">9 AED</span></li>
+    <li><span>Chocolate (R)</span><span class="price">6 AED</span></li>
+    <li><span>Chocolate (L)</span><span class="price">9 AED</span></li>
+  </ul>
+</div>
+
+<div id="lime-list" class="item-list">
+  <h3>Lime Specials</h3>
+  <ul>
+    <li><span>Fresh Lime</span><span class="price">4 AED</span></li>
+    <li><span>Mint Lime</span><span class="price">5 AED</span></li>
+    <li><span>Pine Lime</span><span class="price">5 AED</span></li>
+    <li><span>Grape Lime</span><span class="price">5 AED</span></li>
+    <li><span>Orange Lime</span><span class="price">5 AED</span></li>
+    <li><span>Fresh Lime Soda</span><span class="price">4 AED</span></li>
+  </ul>
+</div>
+
+
+<!-- Cart Modal -->
+<div id="cart-modal" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 350px; background: #fff; color: #000; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.5); z-index: 999;">
+  <h2>Your Cart</h2>
+  <p style="color: grey; font-size: 14px; margin-top: -10px;">Review your items and complete the order</p>
+  
+  <div id="cart-items"></div>
+
+  <div style="margin-top: 10px;">
+    <label><strong>Your Name:</strong><br>
+      <input type="text" id="customer-name" style="width: 100%; margin-bottom: 10px;">
+    </label>
+    <label><strong>Contact Number:</strong><br>
+      <input type="text" id="customer-phone" style="width: 100%; margin-bottom: 10px;">
+    </label>
+    <label><strong>Delivery Address:</strong><br>
+      <textarea id="customer-address" style="width: 100%; height: 60px; margin-bottom: 10px;"></textarea>
+    </label>
+  </div>
+
+  <div id="cart-total" style="margin-bottom: 10px; font-weight: bold;">Total: 0 AED</div>
+
+  <button id="send-whatsapp" onclick="sendOrderToWhatsApp()" style="background: #25d366; border: none; padding: 10px; color: #fff; font-weight: bold; width: 100%; border-radius: 5px; margin-bottom: 10px;">
+    Send to WhatsApp
+  </button>
+
+  <button onclick="toggleCartModal()" style="background: #f44336; border: none; padding: 10px; color: #fff; font-weight: bold; width: 100%; border-radius: 5px;">
+    ← Back to Menu
+  </button>
+</div>
+
+ 
+<script src="app.js"></script>
+</body>
+</html>

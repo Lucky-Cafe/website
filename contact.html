@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - HBaker's</title>
+
+  <!-- Font Imports -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('image/contact1.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+
+    header.navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: rgba(0, 0, 0, 0.85);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-section img {
+      height: 60px;
+      margin-right: 15px;
+    }
+
+    .logo-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .logo-text p {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.2rem;
+      color: #ccc;
+      margin: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 8px 15px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .green-button {
+      background-color: #25D366;
+      color: white !important;
+    }
+
+    .green-button:hover {
+      background-color: #1ebe5d;
+    }
+
+    .contact-container {
+      background-color: rgba(0, 0, 0, 0.85); 
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 40px 30px;
+      border-radius: 10px;
+    }
+
+    .contact-container h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .contact-container p {
+      font-size: 1.1rem;
+      margin: 10px 0;
+      color: #ddd;
+    }
+
+    .map-container {
+      margin-top: 40px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+
+    .social-icons {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      margin: 0 15px;
+      color: #ccc;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-icons a i {
+      margin-right: 8px;
+    }
+
+    .social-icons a:hover {
+      color: #e63946;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo-section">
+      <img src="image/Logo.png" alt="HBaker's Logo" />
+      <div class="logo-text">
+        <h1>HBaker's</h1>
+        <p>Your Daily Treat</p>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="tel:+97142733762" class="green-button"><i class="fas fa-phone-alt"></i> Call Us</a>
+      <a href="https://wa.me/971585733762?text=Hi%20HBaker's,%20I'd%20like%20to%20place%20an%20order." class="green-button" target="_blank">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </nav>
+  </header>
+
+  <section class="contact-container">
+    <h2>Contact Us</h2>
+
+    <div style="margin-top: 40px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+      <div style="flex: 1;">
+        <h3 style="color: #F5C518; font-family: 'Playfair Display', serif;">Contact</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Lucky Cafeteria, Firj Murar, Naif, Deira, Dubai, UAE</p>
+        <p><i class="fas fa-phone"></i> 04-2733762</p>
+        <p><i class="fab fa-whatsapp"></i> +971 585 733 762</p>
+      </div>
+
+      <div style="flex: 1;">
+        <h3 style="color: #F5C518; font-family: 'Playfair Display', serif;">Opening Hours</h3>
+        <p><strong>Monday – Saturday:</strong> 06:00 AM – 12:30 PM</p>
+        <p><strong>Sunday:</strong> 07:00 AM – 12:00 PM</p>
+      </div>
+    </div>
+
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1340.809090959939!2d55.3090511494608!3d25.276260077538794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43e33ec1d4f3%3A0x688f570e633af03e!2sHBakers!5e1!3m2!1sen!2sae!4v1754555445625!5m2!1sen!2sae" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <div class="social-icons">
+      <a href="https://www.instagram.com/hbakerscaf?igsh=a2lrdGwyd2I5c3Q5" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://www.facebook.com/share/172ptxpJMu/" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+    </div>
+  </section>
+</body>
+
+</html>
